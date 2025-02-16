@@ -23,7 +23,7 @@
     transition: color 0.2s;
 
     &:hover {
-      color: color.adjust($secondary, $lightness: -10%);
+      color: color.adjust($accent);
     }
 
     &--active {

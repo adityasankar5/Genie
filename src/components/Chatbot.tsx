@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import '../styles/chatbot.scss';
 
 const Chatbot = () => {
   const [messages, setMessages] = useState<string[]>([]);
@@ -23,27 +24,27 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="p-[2vh] h-screen flex flex-col bg-background text-white">
-      <h2 className="text-[4vw] font-bold mb-[2vh]">Financial Assistant</h2>
-      <div className="flex-grow overflow-y-auto p-[1vh] border rounded-lg bg-secondary">
+    <div className="chat">
+      <h2 className="chat__title">Financial Assistant</h2>
+      <div className="chat__messages">
         {messages.map((msg, index) => (
-          <div key={index} className={`mb-[1vh] ${msg.startsWith('You') ? 'text-right' : 'text-left'}`}>
-            <span className={`${msg.startsWith('You') ? 'bg-primary' : 'bg-accent'} p-[1vh] rounded inline-block`}>
-              {msg}
-            </span>
+          <div 
+            key={index} 
+            className={`chat__message ${
+              msg.startsWith('You') ? 'chat__message--user' : 'chat__message--bot'
+            }`}
+          >
+            <span className="message-bubble">{msg}</span>
           </div>
         ))}
       </div>
-      <div className="mt-[2vh] flex">
+      <div className="chat__input">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask a question..."
-          className="flex-grow p-[1vh] border rounded"
         />
-        <button onClick={handleSend} className="ml-[1vw] p-[1vh] bg-primary text-white rounded">
-          Send
-        </button>
+        <button onClick={handleSend}>Send</button>
       </div>
     </div>
   );
