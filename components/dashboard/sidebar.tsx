@@ -42,7 +42,8 @@ export function Sidebar() {
     },
     {
       name: "Assistant",
-      href: "/assistant",
+      //href: "/assistant",
+      href:"https://geniestockbot.vercel.app/",
       icon: MessageSquare,
     },
     {
