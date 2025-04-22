@@ -230,7 +230,7 @@ export default function LoansPage() {
                   <div>
                     <div className="flex justify-between mb-2">
                       <Label htmlFor="loan-amount">Loan Amount</Label>
-                      <span className="text-sm text-gray-500">${loanAmount.toLocaleString()}</span>
+                      <span className="text-sm text-gray-500">₹{loanAmount.toLocaleString()}</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <DollarSign className="h-4 w-4 text-gray-500" />
@@ -313,18 +313,18 @@ export default function LoansPage() {
                       <div className="space-y-4">
                         <div>
                           <p className="text-sm text-gray-500">Monthly Payment (EMI)</p>
-                          <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">${emi.toFixed(2)}</p>
+                          <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">₹{emi.toFixed(2)}</p>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm text-gray-500">Total Interest</p>
-                            <p className="text-lg font-semibold">${totalInterest.toFixed(2)}</p>
+                            <p className="text-lg font-semibold">₹{totalInterest.toFixed(2)}</p>
                           </div>
 
                           <div>
                             <p className="text-sm text-gray-500">Total Amount</p>
-                            <p className="text-lg font-semibold">${totalAmount.toFixed(2)}</p>
+                            <p className="text-lg font-semibold">₹{totalAmount.toFixed(2)}</p>
                           </div>
                         </div>
 
@@ -371,10 +371,10 @@ export default function LoansPage() {
                         {generateAmortizationSchedule().map((row) => (
                           <TableRow key={row.month}>
                             <TableCell>{row.month}</TableCell>
-                            <TableCell>${row.payment.toFixed(2)}</TableCell>
-                            <TableCell>${row.principalPayment.toFixed(2)}</TableCell>
-                            <TableCell>${row.interestPayment.toFixed(2)}</TableCell>
-                            <TableCell>${row.balance.toFixed(2)}</TableCell>
+                            <TableCell>₹{row.payment.toFixed(2)}</TableCell>
+                            <TableCell>₹{row.principalPayment.toFixed(2)}</TableCell>
+                            <TableCell>₹{row.interestPayment.toFixed(2)}</TableCell>
+                            <TableCell>₹{row.balance.toFixed(2)}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -454,7 +454,7 @@ export default function LoansPage() {
                         <TableCell className="font-medium">{offer.lender}</TableCell>
                         <TableCell>{offer.rate}%</TableCell>
                         <TableCell>{offer.term}</TableCell>
-                        <TableCell>${offer.maxAmount.toLocaleString()}</TableCell>
+                        <TableCell>₹{offer.maxAmount.toLocaleString()}</TableCell>
                         <TableCell>{offer.processingFee}</TableCell>
                         <TableCell>{offer.prepaymentPenalty}</TableCell>
                         <TableCell>
@@ -586,7 +586,7 @@ export default function LoansPage() {
                             </div>
                             <div className="flex justify-between">
                               <span className="text-sm text-gray-500">Interest Saved</span>
-                              <span className="font-medium text-green-600">$4,328.45</span>
+                              <span className="font-medium text-green-600">₹4,328.45</span>
                             </div>
                           </div>
                         </div>
