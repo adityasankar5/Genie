@@ -72,12 +72,12 @@ export default function TaxesPage() {
   const commonDeductions = [
     {
       name: "Student Loan Interest",
-      description: "Up to $2,500 of student loan interest paid",
-      eligibility: "Income below $85,000 (single) or $170,000 (married)",
+      description: "Up to ₹2,500 of student loan interest paid",
+      eligibility: "Income below ₹85,000 (single) or ₹170,000 (married)",
     },
     {
       name: "Mortgage Interest",
-      description: "Interest paid on home mortgages up to $750,000",
+      description: "Interest paid on home mortgages up to ₹750,000",
       eligibility: "Homeowners with mortgage",
     },
     {
@@ -149,6 +149,14 @@ export default function TaxesPage() {
     setTaxLiability(tax)
     setEffectiveRate((tax / income) * 100)
     setShowResults(true)
+  }
+
+  // Format currency
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+    }).format(amount)
   }
 
   return (
@@ -248,13 +256,13 @@ export default function TaxesPage() {
                       <div className="space-y-4">
                         <div>
                           <p className="text-sm text-gray-500">Taxable Income</p>
-                          <p className="text-lg font-semibold">${Math.max(0, income - deductions).toLocaleString()}</p>
+                          <p className="text-lg font-semibold">{formatCurrency(Math.max(0, income - deductions))}</p>
                         </div>
 
                         <div>
                           <p className="text-sm text-gray-500">Estimated Tax Liability</p>
                           <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-                            ${taxLiability.toFixed(2)}
+                            {formatCurrency(taxLiability)}
                           </p>
                         </div>
 
@@ -280,7 +288,7 @@ export default function TaxesPage() {
                                   className={`flex justify-between text-sm ${isInBracket ? "font-medium" : "text-gray-500"}`}
                                 >
                                   <span>{(bracket.rate * 100).toFixed(0)}% bracket</span>
-                                  <span>${taxInBracket.toFixed(2)}</span>
+                                  <span>{formatCurrency(taxInBracket)}</span>
                                 </div>
                               )
                             })}
@@ -329,8 +337,8 @@ export default function TaxesPage() {
                       different rates. As your income increases, the additional income may be taxed at a higher rate.
                     </p>
                     <p>
-                      For example, in 2022, a single filer pays 10% on the first $10,275 of income, 12% on income
-                      between $10,276 and $41,775, and so on.
+                      For example, in 2022, a single filer pays 10% on the first {formatCurrency(10275)} of income, 12% on income
+                      between {formatCurrency(10276)} and {formatCurrency(41775)}, and so on.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
@@ -339,12 +347,12 @@ export default function TaxesPage() {
                   <AccordionTrigger>What's the difference between tax deductions and tax credits?</AccordionTrigger>
                   <AccordionContent>
                     <p className="mb-2">
-                      <strong>Tax deductions</strong> reduce your taxable income. For example, if you have $50,000 in
-                      income and $12,000 in deductions, you'll only be taxed on $38,000.
+                      <strong>Tax deductions</strong> reduce your taxable income. For example, if you have {formatCurrency(50000)} in
+                      income and {formatCurrency(12000)} in deductions, you'll only be taxed on {formatCurrency(38000)}.
                     </p>
                     <p>
                       <strong>Tax credits</strong> directly reduce the amount of tax you owe, dollar for dollar. For
-                      example, a $1,000 tax credit reduces your tax bill by $1,000, regardless of your tax bracket.
+                      example, a {formatCurrency(1000)} tax credit reduces your tax bill by {formatCurrency(1000)}, regardless of your tax bracket.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
@@ -436,9 +444,9 @@ export default function TaxesPage() {
                     </CardHeader>
                     <CardContent className="pt-0">
                       <ul className="list-disc list-inside space-y-1">
-                        <li>Single: $12,950</li>
-                        <li>Married Filing Jointly: $25,900</li>
-                        <li>Head of Household: $19,400</li>
+                        <li>Single: {formatCurrency(12950)}</li>
+                        <li>Married Filing Jointly: {formatCurrency(25900)}</li>
+                        <li>Head of Household: {formatCurrency(19400)}</li>
                       </ul>
                       <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                         The standard deduction is a fixed amount that reduces your taxable income. It's simpler than
@@ -457,7 +465,7 @@ export default function TaxesPage() {
                       </p>
                       <ul className="list-disc list-inside space-y-1">
                         <li>Mortgage interest</li>
-                        <li>State and local taxes (up to $10,000)</li>
+                        <li>State and local taxes (up to {formatCurrency(10000)})</li>
                         <li>Charitable contributions</li>
                         <li>Medical expenses (exceeding 7.5% of AGI)</li>
                       </ul>
@@ -507,7 +515,7 @@ export default function TaxesPage() {
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-sm">
-                        A credit of up to $2,000 per qualifying child under age 17. Partially refundable up to $1,500
+                        A credit of up to {formatCurrency(2000)} per qualifying child under age 17. Partially refundable up to {formatCurrency(1500)}
                         per child.
                       </p>
                     </CardContent>
@@ -519,7 +527,7 @@ export default function TaxesPage() {
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-sm">
-                        A credit of up to $2,500 per eligible student for qualified education expenses during the first
+                        A credit of up to {formatCurrency(2500)} per eligible student for qualified education expenses during the first
                         four years of higher education.
                       </p>
                     </CardContent>
@@ -531,7 +539,7 @@ export default function TaxesPage() {
                     </CardHeader>
                     <CardContent className="pt-0">
                       <p className="text-sm">
-                        A credit of up to $1,000 ($2,000 if married filing jointly) for contributions to retirement
+                        A credit of up to {formatCurrency(1000)} ({formatCurrency(2000)} if married filing jointly) for contributions to retirement
                         accounts like 401(k)s and IRAs.
                       </p>
                     </CardContent>

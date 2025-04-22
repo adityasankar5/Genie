@@ -57,6 +57,14 @@ const getRandomColor = () => {
   return colors[Math.floor(Math.random() * colors.length)]
 }
 
+// Format currency
+const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+  }).format(amount)
+}
+
 export default function BudgetingPage() {
   const { toast } = useToast()
   const [income, setIncome] = useState<number>(0)
@@ -283,16 +291,16 @@ export default function BudgetingPage() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
                       <p className="text-sm text-gray-600 dark:text-gray-400">Total Income</p>
-                      <p className="text-2xl font-bold">${income.toFixed(2)}</p>
+                      <p className="text-2xl font-bold">{formatCurrency(income)}</p>
                     </div>
                     <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
                       <p className="text-sm text-gray-600 dark:text-gray-400">Total Expenses</p>
-                      <p className="text-2xl font-bold">${totalExpenses.toFixed(2)}</p>
+                      <p className="text-2xl font-bold">{formatCurrency(totalExpenses)}</p>
                     </div>
                     <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
                       <p className="text-sm text-gray-600 dark:text-gray-400">Remaining Budget</p>
                       <p className={`text-2xl font-bold ${remainingBudget >= 0 ? "text-green-600" : "text-red-600"}`}>
-                        ${remainingBudget.toFixed(2)}
+                        {formatCurrency(remainingBudget)}
                       </p>
                     </div>
                   </div>
@@ -339,7 +347,7 @@ export default function BudgetingPage() {
                             beginAtZero: true,
                             title: {
                               display: true,
-                              text: "Amount ($)",
+                              text: "Amount (₹)",
                             },
                           },
                         },
@@ -363,7 +371,7 @@ export default function BudgetingPage() {
                           <li key={category.id} className="flex justify-between">
                             <span>{category.name}</span>
                             <span className="font-medium">
-                              ${category.amount.toFixed(2)} (
+                              {formatCurrency(category.amount)} (
                               {income > 0 ? ((category.amount / income) * 100).toFixed(1) : "0"}%)
                             </span>
                           </li>
@@ -376,15 +384,15 @@ export default function BudgetingPage() {
                       <ul className="space-y-2">
                         <li className="flex justify-between">
                           <span>Needs (50%)</span>
-                          <span className="font-medium">${needsAmount.toFixed(2)}</span>
+                          <span className="font-medium">{formatCurrency(needsAmount)}</span>
                         </li>
                         <li className="flex justify-between">
                           <span>Wants (30%)</span>
-                          <span className="font-medium">${wantsAmount.toFixed(2)}</span>
+                          <span className="font-medium">{formatCurrency(wantsAmount)}</span>
                         </li>
                         <li className="flex justify-between">
                           <span>Savings (20%)</span>
-                          <span className="font-medium">${savingsAmount.toFixed(2)}</span>
+                          <span className="font-medium">{formatCurrency(savingsAmount)}</span>
                         </li>
                       </ul>
                     </div>
@@ -412,8 +420,8 @@ export default function BudgetingPage() {
                       <h3 className="font-medium mb-2">Income vs. Expenses</h3>
                       <p className="text-gray-600 dark:text-gray-400">
                         {remainingBudget >= 0
-                          ? `You have a budget surplus of $${remainingBudget.toFixed(2)}. Great job managing your expenses!`
-                          : `You have a budget deficit of $${Math.abs(remainingBudget).toFixed(2)}. Consider reducing expenses or increasing income.`}
+                          ? `You have a budget surplus of ${formatCurrency(remainingBudget)}. Great job managing your expenses!`
+                          : `You have a budget deficit of ${formatCurrency(Math.abs(remainingBudget))}. Consider reducing expenses or increasing income.`}
                       </p>
                     </div>
 
@@ -422,7 +430,7 @@ export default function BudgetingPage() {
                       <p className="text-gray-600 dark:text-gray-400">
                         Your highest expense category is{" "}
                         {expenseCategories.length > 0
-                          ? `${expenseCategories.reduce((prev, current) => (prev.amount > current.amount ? prev : current)).name} at $${expenseCategories.reduce((prev, current) => (prev.amount > current.amount ? prev : current)).amount.toFixed(2)}`
+                          ? `${expenseCategories.reduce((prev, current) => (prev.amount > current.amount ? prev : current)).name} at ${formatCurrency(expenseCategories.reduce((prev, current) => (prev.amount > current.amount ? prev : current)).amount)}`
                           : "not available due to no expense data"}
                         .
                       </p>
@@ -434,9 +442,9 @@ export default function BudgetingPage() {
                         Based on the 50/30/20 rule, you should allocate:
                       </p>
                       <ul className="list-disc list-inside mt-2 space-y-1 text-gray-600 dark:text-gray-400">
-                        <li>${needsAmount.toFixed(2)} for needs (housing, food, utilities)</li>
-                        <li>${wantsAmount.toFixed(2)} for wants (entertainment, dining out)</li>
-                        <li>${savingsAmount.toFixed(2)} for savings and debt repayment</li>
+                        <li>{formatCurrency(needsAmount)} for needs (housing, food, utilities)</li>
+                        <li>{formatCurrency(wantsAmount)} for wants (entertainment, dining out)</li>
+                        <li>{formatCurrency(savingsAmount)} for savings and debt repayment</li>
                       </ul>
                     </div>
                   </div>

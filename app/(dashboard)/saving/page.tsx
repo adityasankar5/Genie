@@ -254,7 +254,7 @@ export default function SavingPage() {
                     <div className="flex justify-between items-start">
                       <div>
                         <CardTitle>{goal.name}</CardTitle>
-                        <CardDescription>Target: ${goal.targetAmount.toLocaleString()}</CardDescription>
+                        <CardDescription>Target: ₹{goal.targetAmount.toLocaleString()}</CardDescription>
                       </div>
                       <Button variant="ghost" size="icon" onClick={() => handleRemoveSavingGoal(goal.id)}>
                         <Trash2 className="h-4 w-4" />
@@ -268,7 +268,7 @@ export default function SavingPage() {
                         <div className="flex justify-between mb-1">
                           <span className="text-sm text-gray-600 dark:text-gray-400">Progress</span>
                           <span className="text-sm font-medium">
-                            ${goal.currentAmount.toLocaleString()} / ${goal.targetAmount.toLocaleString()}
+                            ₹{goal.currentAmount.toLocaleString()} / ₹{goal.targetAmount.toLocaleString()}
                           </span>
                         </div>
                         <Progress value={(goal.currentAmount / goal.targetAmount) * 100} className="h-2" />
@@ -426,7 +426,7 @@ export default function SavingPage() {
                     <div className="space-y-4">
                       <div className="flex justify-between">
                         <Label htmlFor="monthly-saving">Monthly Saving Target</Label>
-                        <span className="text-sm font-medium">${monthlySavingTarget}</span>
+                        <span className="text-sm font-medium">₹{monthlySavingTarget}</span>
                       </div>
                       <Slider
                         id="monthly-saving"
@@ -437,8 +437,8 @@ export default function SavingPage() {
                         onValueChange={(value) => setMonthlySavingTarget(value[0])}
                       />
                       <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
-                        <span>$0</span>
-                        <span>${monthlyIncome}</span>
+                        <span>₹0</span>
+                        <span>₹{monthlyIncome}</span>
                       </div>
                     </div>
 
@@ -495,11 +495,11 @@ export default function SavingPage() {
                                   <div>
                                     <h3 className="font-medium">{goal.name}</h3>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                                      ${goal.currentAmount.toLocaleString()} of ${goal.targetAmount.toLocaleString()}
+                                      ₹{goal.currentAmount.toLocaleString()} of ₹{goal.targetAmount.toLocaleString()}
                                     </p>
                                   </div>
                                   <div className="text-right">
-                                    <p className="font-medium">${allocation.toFixed(2)}/month</p>
+                                    <p className="font-medium">₹{allocation.toFixed(2)}/month</p>
                                     <p className="text-sm text-gray-600 dark:text-gray-400">
                                       {((allocation / monthlySavingTarget) * 100).toFixed(0)}% of savings
                                     </p>
@@ -584,7 +584,7 @@ export default function SavingPage() {
                               <div className="flex items-center">
                                 <Scissors className="h-4 w-4 text-gray-500 mr-2" />
                                 <span className="text-sm font-medium">
-                                  Potential monthly savings: ${tip.potentialSavings}
+                                  Potential monthly savings: ₹{tip.potentialSavings}
                                 </span>
                               </div>
                             </div>
@@ -623,7 +623,7 @@ export default function SavingPage() {
                         <h3 className="font-medium mb-2">Potential Monthly Savings</h3>
                         <div className="flex items-center">
                           <DollarSign className="h-5 w-5 text-gray-500 mr-2" />
-                          <span className="text-2xl font-bold">${totalPotentialSavings}</span>
+                          <span className="text-2xl font-bold">₹{totalPotentialSavings}</span>
                         </div>
                         <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                           Implement all tips to save this amount monthly
@@ -634,7 +634,7 @@ export default function SavingPage() {
                         <h3 className="font-medium mb-2">Implemented Savings</h3>
                         <div className="flex items-center">
                           <DollarSign className="h-5 w-5 text-green-500 mr-2" />
-                          <span className="text-2xl font-bold">${totalImplementedSavings}</span>
+                          <span className="text-2xl font-bold">₹{totalImplementedSavings}</span>
                         </div>
                         <div className="mt-2">
                           <div className="flex justify-between mb-1">
@@ -662,7 +662,7 @@ export default function SavingPage() {
                           Impact on Saving Goals
                         </h3>
                         <p className="text-sm text-gray-600 dark:text-gray-400">
-                          By implementing all tips, you could increase your monthly savings by ${totalPotentialSavings},
+                          By implementing all tips, you could increase your monthly savings by ₹{totalPotentialSavings},
                           potentially reaching your goals{" "}
                           {totalPotentialSavings > 0
                             ? `${Math.round((totalPotentialSavings / (monthlySavingTarget || 1)) * 100)}% faster`

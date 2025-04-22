@@ -34,7 +34,7 @@ const mockPolicies: Record<PolicyCategory, Policy[]> = {
       id: "ins1",
       name: "Comprehensive Health Plan",
       provider: "HealthGuard",
-      coverage: "$1,000,000",
+      coverage: "₹1,000,000",
       premium: 350,
       term: "Annual",
       riskLevel: "low",
@@ -52,7 +52,7 @@ const mockPolicies: Record<PolicyCategory, Policy[]> = {
       id: "ins2",
       name: "Basic Health Plan",
       provider: "MediCare Plus",
-      coverage: "$500,000",
+      coverage: "₹500,000",
       premium: 200,
       term: "Annual",
       riskLevel: "medium",
@@ -69,7 +69,7 @@ const mockPolicies: Record<PolicyCategory, Policy[]> = {
       id: "ins3",
       name: "Term Life Insurance",
       provider: "LifeSecure",
-      coverage: "$500,000",
+      coverage: "₹500,000",
       premium: 30,
       term: "20 years",
       riskLevel: "low",
@@ -81,7 +81,7 @@ const mockPolicies: Record<PolicyCategory, Policy[]> = {
       id: "ins4",
       name: "Whole Life Insurance",
       provider: "Guardian Life",
-      coverage: "$250,000",
+      coverage: "₹250,000",
       premium: 150,
       term: "Lifetime",
       riskLevel: "low",
@@ -499,7 +499,7 @@ export default function PoliciesPage() {
                         <TableCell>{policy.coverage}</TableCell>
                         <TableCell>
                           {selectedCategory === "insurance"
-                            ? `$${policy.premium}/month`
+                            ? `₹${policy.premium}/month`
                             : policy.premium === 0
                               ? "Varies"
                               : `${policy.premium}%`}
@@ -563,7 +563,7 @@ export default function PoliciesPage() {
                             </p>
                             <p className="font-medium">
                               {selectedCategory === "insurance"
-                                ? `$${selectedPolicy.premium}/month`
+                                ? `₹${selectedPolicy.premium}/month`
                                 : selectedPolicy.premium === 0
                                   ? "Varies"
                                   : `${selectedPolicy.premium}%`}
@@ -886,7 +886,7 @@ export default function PoliciesPage() {
                       {comparedPolicies.map((policy) => (
                         <TableCell key={policy.id}>
                           {selectedCategory === "insurance"
-                            ? `$${policy.premium}/month`
+                            ? `₹${policy.premium}/month`
                             : policy.premium === 0
                               ? "Varies"
                               : `${policy.premium}%`}

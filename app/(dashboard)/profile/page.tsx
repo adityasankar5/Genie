@@ -26,7 +26,7 @@ export default function ProfilePage() {
     phone: "(555) 123-4567",
     address: "123 Main St, Anytown, USA",
     occupation: "Software Developer",
-    incomeRange: "$75,000 - $100,000",
+    incomeRange: "₹75,000 - ₹100,000",
     financialGoals: "Save for retirement, buy a house",
   })
 
@@ -59,7 +59,7 @@ export default function ProfilePage() {
       type: "Budget Plan",
       title: "Monthly Budget - March 2023",
       date: "2023-03-01",
-      preview: "Income: $5,200, Expenses: $3,800, Savings: $1,400...",
+      preview: "Income: ₹5,200, Expenses: ₹3,800, Savings: ₹1,400...",
     },
     {
       id: 3,
@@ -260,12 +260,12 @@ export default function ProfilePage() {
                             <SelectValue placeholder="Select income range" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="Under $25,000">Under $25,000</SelectItem>
-                            <SelectItem value="$25,000 - $50,000">$25,000 - $50,000</SelectItem>
-                            <SelectItem value="$50,000 - $75,000">$50,000 - $75,000</SelectItem>
-                            <SelectItem value="$75,000 - $100,000">$75,000 - $100,000</SelectItem>
-                            <SelectItem value="$100,000 - $150,000">$100,000 - $150,000</SelectItem>
-                            <SelectItem value="Over $150,000">Over $150,000</SelectItem>
+                            <SelectItem value="Under ₹25,000">Under ₹25,000</SelectItem>
+                            <SelectItem value="₹25,000 - ₹50,000">₹25,000 - ₹50,000</SelectItem>
+                            <SelectItem value="₹50,000 - ₹75,000">₹50,000 - ₹75,000</SelectItem>
+                            <SelectItem value="₹75,000 - ₹100,000">₹75,000 - ₹100,000</SelectItem>
+                            <SelectItem value="₹100,000 - ₹150,000">₹100,000 - ₹150,000</SelectItem>
+                            <SelectItem value="Over ₹150,000">Over ₹150,000</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>

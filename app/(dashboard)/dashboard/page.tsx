@@ -83,9 +83,9 @@ export default function DashboardPage() {
 
   // Format currency
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-US", {
+    return new Intl.NumberFormat("en-IN", {
       style: "currency",
-      currency: "USD",
+      currency: "INR",
     }).format(amount)
   }
 
@@ -140,7 +140,7 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {dashboardData ? formatCurrency(dashboardData.totalBalance) : "$0.00"}
+                  {dashboardData ? formatCurrency(dashboardData.totalBalance) : "₹0.00"}
                 </div>
                 <p className="text-xs text-muted-foreground">+2.5% from last month</p>
               </CardContent>
@@ -152,7 +152,7 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {dashboardData ? formatCurrency(dashboardData.monthlyIncome) : "$0.00"}
+                  {dashboardData ? formatCurrency(dashboardData.monthlyIncome) : "₹0.00"}
                 </div>
                 <div className="flex items-center pt-1">
                   <ArrowUpRight className="h-3 w-3 text-green-500 mr-1" />
@@ -167,7 +167,7 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {dashboardData ? formatCurrency(dashboardData.monthlyExpenses) : "$0.00"}
+                  {dashboardData ? formatCurrency(dashboardData.monthlyExpenses) : "₹0.00"}
                 </div>
                 <div className="flex items-center pt-1">
                   <TrendingDown className="h-3 w-3 text-red-500 mr-1" />

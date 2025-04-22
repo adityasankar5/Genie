@@ -161,7 +161,7 @@ export function AddTransactionDialog({ open, onOpenChange, onSuccess }: AddTrans
                   <FormLabel>Amount</FormLabel>
                   <FormControl>
                     <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2">$</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2">₹</span>
                       <Input
                         placeholder="0.00"
                         className="pl-8"
