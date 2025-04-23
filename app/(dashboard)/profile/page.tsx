@@ -2,7 +2,8 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { createClient } from "@supabase/supabase-js"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -15,20 +16,81 @@ import { Textarea } from "@/components/ui/textarea"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useToast } from "@/hooks/use-toast"
 
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
+
 export default function ProfilePage() {
   const { toast } = useToast()
 
   // User profile state
   const [profile, setProfile] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
+    firstName: "",
+    lastName: "",
+    email: "",
     phone: "(555) 123-4567",
     address: "123 Main St, Anytown, USA",
     occupation: "Software Developer",
     incomeRange: "₹75,000 - ₹100,000",
     financialGoals: "Save for retirement, buy a house",
   })
+
+  // Fetch user profile data from Supabase
+  const fetchProfile = async () => {
+    try {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
+
+      const userId = session?.user?.id
+
+      if (!userId) {
+        console.error("User not logged in")
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "User not logged in.",
+        })
+        return
+      }
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("first_name, last_name, email")
+        .eq("id", userId)
+        .single()
+
+      if (error) {
+        console.error("Error fetching profile:", error)
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Failed to fetch profile data.",
+        })
+        return
+      }
+
+      if (data) {
+        setProfile({
+          firstName: data.first_name || "",
+          lastName: data.last_name || "",
+          email: data.email || "",
+          phone: "(555) 123-4567",
+          address: "123 Main St, Anytown, USA",
+          occupation: "Software Developer",
+          incomeRange: "₹75,000 - ₹100,000",
+          financialGoals: "Save for retirement, buy a house",
+        })
+      }
+    } catch (err) {
+      console.error("Unexpected error fetching profile:", err)
+    }
+  }
+
+  useEffect(() => {
+    fetchProfile()
+  }, [])
 
   // Notification preferences state
   const [notifications, setNotifications] = useState({
